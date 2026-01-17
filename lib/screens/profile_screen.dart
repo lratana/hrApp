@@ -369,6 +369,75 @@ class ProfileScreen extends StatelessWidget {
                           title: 'Change Password',
                           onTap: () {},
                         ),
+                        Divider(height: 1, color: Colors.grey[200]),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.dark_mode_outlined,
+                                color: const Color(0xFF4A90D9),
+                                size: 24,
+                              ),
+                              const SizedBox(width: 16),
+                              DropdownButton(
+                                alignment: Alignment.centerLeft,
+                                hint: Text('Select Mode'),
+                                items: [
+                                  DropdownMenuItem(
+                                    value: '1',
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.light_mode,
+                                          color: Colors.grey[700],
+                                        ),
+                                        const SizedBox(width: 8),
+
+                                        Text('Light Mode'),
+                                        Spacer(),
+                                      ],
+                                    ),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: '2',
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.dark_mode,
+                                          color: Colors.grey[700],
+                                        ),
+                                        const SizedBox(width: 8),
+
+                                        Text('Dark Mode'),
+                                        Spacer(),
+                                        Icon(
+                                          Icons.check_circle,
+                                          color: Colors.blue,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: '3',
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.settings,
+                                          color: Colors.grey[700],
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text('System Default'),
+                                        Spacer(),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                                onChanged: (value) {},
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -395,6 +464,7 @@ class ProfileScreen extends StatelessWidget {
           children: [
             Icon(icon, color: const Color(0xFF4A90D9), size: 24),
             const SizedBox(width: 16),
+
             Expanded(
               child: Text(
                 title,
