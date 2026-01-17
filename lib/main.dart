@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/providers/select_date_time.dart';
+import 'package:flutter_application_1/providers/theme_logic.dart';
 import 'package:flutter_application_1/screens/slash_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const HRPortalApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeLogic()),
+        ChangeNotifierProvider(create: (_) => SelectDateTime()),
+      ],
+      child: const HRPortalApp(),
+    ),
+  );
 }
 
 class HRPortalApp extends StatelessWidget {

@@ -1,12 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/appbar_decoration.dart';
+import 'package:flutter_application_1/providers/select_date_time.dart';
 import 'package:flutter_application_1/screens/notification_screen.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final selectDateTime = context.watch<SelectDateTime>();
+    final dateTime = context.read<SelectDateTime>().selectedDateTime;
     return Column(
       children: [
         // Header
@@ -36,6 +41,10 @@ class HomeScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.search, color: Colors.white, size: 28),
                   ),
                   Stack(
                     children: [
@@ -288,9 +297,51 @@ class HomeScreen extends StatelessWidget {
                         const Divider(height: 1),
                         _TaskItem(
                           title: 'Schedule Training Session',
-                          dueDate: 'Due Apr 28',
+                          dueDate:
+                              "Due ${selectDateTime.selectedDateTime.month}-${selectDateTime.selectedDateTime.day}",
+
                           isUrgent: false,
-                          onTap: () {},
+                          onTap: () {
+                            showCupertinoModalPopup(
+                              context: context,
+
+                              builder: (_) => Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    height: 250,
+                                    color: Colors.white,
+                                    child: Stack(
+                                      children: [
+                                        CupertinoDatePicker(
+                                          initialDateTime: DateTime.now(),
+                                          mode: CupertinoDatePickerMode
+                                              .date, // Or dateAndTime, time
+                                          onDateTimeChanged:
+                                              (DateTime newDate) {
+                                                // Handle date change
+                                                selectDateTime.updateDateTime(
+                                                  newDate,
+                                                );
+                                              },
+                                        ),
+
+                                        Positioned(
+                                          right: 0,
+                                          child: CupertinoButton(
+                                            child: const Text('Done'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),

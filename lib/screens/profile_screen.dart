@@ -361,7 +361,11 @@ class ProfileScreen extends StatelessWidget {
                         _buildSettingsItem(
                           icon: Icons.notifications_outlined,
                           title: 'Notifications',
-                          onTap: () {},
+                          onTap: () {
+                            MaterialPageRoute(
+                              builder: (context) => const NotificationsScreen(),
+                            );
+                          },
                         ),
                         Divider(height: 1, color: Colors.grey[200]),
                         _buildSettingsItem(
@@ -370,81 +374,91 @@ class ProfileScreen extends StatelessWidget {
                           onTap: () {},
                         ),
                         Divider(height: 1, color: Colors.grey[200]),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.dark_mode_outlined,
-                                color: const Color(0xFF4A90D9),
-                                size: 24,
-                              ),
-                              const SizedBox(width: 16),
-                              DropdownButton(
-                                alignment: Alignment.centerLeft,
-                                hint: Text('Select Mode'),
-                                items: [
-                                  DropdownMenuItem(
-                                    value: '1',
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.light_mode,
-                                          color: Colors.grey[700],
-                                        ),
-                                        const SizedBox(width: 8),
+                        _buildSettingsItem(
+                          icon: Icons.mode_night_outlined,
+                          title: 'Settings Mode',
+                          onTap: () {
+                            // Handle settings mode tap
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Settings Mode'),
+                                  content: const Text(
+                                    'Select your preferred theme mode.',
+                                  ),
+                                  actions: [
+                                    ListTile(
+                                      title: const Text('Light Mode'),
+                                      leading: const Icon(Icons.light_mode),
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    ListTile(
+                                      title: const Text('Dark Mode'),
+                                      leading: const Icon(Icons.dark_mode),
+                                      trailing: const Icon(Icons.check_circle),
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    ListTile(
+                                      title: const Text('System Mode'),
+                                      leading: const Icon(Icons.settings),
 
-                                        Text('Light Mode'),
-                                        Spacer(),
-                                        Icon(
-                                          Icons.check_circle,
-                                          color: Colors.blue,
-                                        ),
-                                      ],
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                      },
                                     ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        Divider(height: 1, color: Colors.grey[200]),
+                        _buildSettingsItem(
+                          icon: Icons.text_fields_outlined,
+                          title: 'Font Size',
+                          onTap: () {
+                            // Handle font size tap
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Font Size'),
+                                  content: const Text(
+                                    'Adjust the font size for better readability.',
                                   ),
-                                  DropdownMenuItem(
-                                    value: '2',
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.dark_mode,
-                                          color: Colors.grey[700],
-                                        ),
-                                        const SizedBox(width: 8),
 
-                                        Text('Dark Mode'),
-                                        Spacer(),
-                                        Icon(
-                                          Icons.check_circle,
-                                          color: Colors.blue,
-                                        ),
-                                      ],
+                                  actions: [
+                                    buildFontSlider(),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('Close'),
                                     ),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: '3',
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.settings,
-                                          color: Colors.grey[700],
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Text('System Default'),
-                                        Spacer(),
-                                        Icon(
-                                          Icons.check_circle,
-                                          color: Colors.blue,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                                onChanged: (value) {},
-                              ),
-                            ],
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        Divider(height: 1, color: Colors.grey[200]),
+                        ListTile(
+                          leading: const Icon(Icons.logout, color: Colors.red),
+                          title: const Text(
+                            'Logout',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
+                          onTap: () {
+                            // Handle logout action
+                          },
                         ),
                       ],
                     ),
@@ -456,6 +470,17 @@ class ProfileScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Slider buildFontSlider() {
+    return Slider(
+      max: 4,
+      min: 0,
+      value: 2,
+      onChanged: (value) {
+        // Handle font size change
+      },
     );
   }
 
