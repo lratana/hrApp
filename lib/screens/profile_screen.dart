@@ -396,6 +396,10 @@ class ProfileScreen extends StatelessWidget {
 
                                         Text('Light Mode'),
                                         Spacer(),
+                                        Icon(
+                                          Icons.check_circle,
+                                          color: Colors.blue,
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -429,6 +433,10 @@ class ProfileScreen extends StatelessWidget {
                                         const SizedBox(width: 8),
                                         Text('System Default'),
                                         Spacer(),
+                                        Icon(
+                                          Icons.check_circle,
+                                          color: Colors.blue,
+                                        ),
                                       ],
                                     ),
                                   ),
