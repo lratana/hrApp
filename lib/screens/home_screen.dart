@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectDateTime = context.watch<SelectDateTime>();
-    final dateTime = context.read<SelectDateTime>().selectedDateTime;
+
     return Column(
       children: [
         // Header
@@ -299,7 +299,6 @@ class HomeScreen extends StatelessWidget {
                           title: 'Schedule Training Session',
                           dueDate:
                               "Due ${selectDateTime.selectedDateTime.month}-${selectDateTime.selectedDateTime.day}",
-
                           isUrgent: false,
                           onTap: () {
                             showCupertinoModalPopup(
