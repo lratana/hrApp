@@ -5,6 +5,7 @@ import 'package:flutter_application_1/providers/select_date_time.dart';
 import 'package:flutter_application_1/screens/notification_screen.dart';
 import 'package:flutter_application_1/screens/request_leave_screen.dart';
 import 'package:flutter_application_1/screens/clock_inout_screen.dart';
+import 'package:flutter_application_1/screens/submit_expense_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -268,7 +269,15 @@ class HomeScreen extends StatelessWidget {
                               label: 'Submit Expense',
                               iconColor: const Color(0xFFED8936),
                               backgroundColor: const Color(0xFFFFF5F0),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SubmitExpenseScreen(),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                           const SizedBox(width: 12),
