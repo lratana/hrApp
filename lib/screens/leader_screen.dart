@@ -239,6 +239,9 @@ class MyLeaderScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: _buildActionButton(
+                                onTap: () {
+                                  // Video call action
+                                },
                                 icon: Icons.videocam,
                                 label: 'Video Call',
                                 color: const Color(0xFFF59E0B),
@@ -247,6 +250,9 @@ class MyLeaderScreen extends StatelessWidget {
                             const SizedBox(width: 12),
                             Expanded(
                               child: _buildActionButton(
+                                onTap: () {
+                                  // Send message action
+                                },
                                 icon: Icons.chat_bubble,
                                 label: 'Send Message',
                                 color: const Color(0xFF3B82F6),
@@ -255,6 +261,9 @@ class MyLeaderScreen extends StatelessWidget {
                             const SizedBox(width: 12),
                             Expanded(
                               child: _buildActionButton(
+                                onTap: () {
+                                  // Add member action
+                                },
                                 icon: Icons.add_circle,
                                 label: 'Add Member',
                                 color: const Color(0xFF10B981),
@@ -399,36 +408,40 @@ class MyLeaderScreen extends StatelessWidget {
     required IconData icon,
     required String label,
     required Color color,
+    required Function()? onTap,
   }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.withOpacity(0.2)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Icon(icon, color: color, size: 32),
-          const SizedBox(height: 8),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: color,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.grey.withOpacity(0.2)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 4,
+              offset: const Offset(0, 2),
             ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+          ],
+        ),
+        child: Column(
+          children: [
+            Icon(icon, color: color, size: 32),
+            const SizedBox(height: 8),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: color,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }
