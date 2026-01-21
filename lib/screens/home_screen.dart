@@ -4,6 +4,7 @@ import 'package:flutter_application_1/appbar_decoration.dart';
 import 'package:flutter_application_1/providers/select_date_time.dart';
 import 'package:flutter_application_1/screens/notification_screen.dart';
 import 'package:flutter_application_1/screens/request_leave_screen.dart';
+import 'package:flutter_application_1/screens/clock_inout_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -168,7 +169,8 @@ class HomeScreen extends StatelessWidget {
                                 const SizedBox(width: 16),
                                 const Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Vacation Leave',
@@ -241,7 +243,15 @@ class HomeScreen extends StatelessWidget {
                               label: 'Clock In/Out',
                               iconColor: const Color(0xFF2E7D95),
                               backgroundColor: const Color(0xFFE3F2FD),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ClockInOutScreen(),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ],
