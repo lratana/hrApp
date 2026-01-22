@@ -2,10 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/appbar_decoration.dart';
 import 'package:flutter_application_1/providers/select_date_time.dart';
+import 'package:flutter_application_1/screens/my_requests_screen.dart';
 import 'package:flutter_application_1/screens/notification_screen.dart';
 import 'package:flutter_application_1/screens/request_leave_screen.dart';
 import 'package:flutter_application_1/screens/clock_inout_screen.dart';
 import 'package:flutter_application_1/screens/submit_expense_screen.dart';
+import 'package:flutter_application_1/screens/timesheet_screen.dart';
+import 'package:flutter_application_1/screens/search_screen.dart';
+import 'package:flutter_application_1/screens/task_screen.dart';
+import 'package:flutter_application_1/screens/task_detail_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -48,7 +53,14 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SearchScreen(),
+                            ),
+                          );
+                        },
                         icon: Icon(Icons.search, color: Colors.white, size: 28),
                       ),
                       Stack(
@@ -115,7 +127,7 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Welcome, Jessica!',
+                            'Welcome, Ratana!',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -234,7 +246,15 @@ class HomeScreen extends StatelessWidget {
                               label: 'Request Leave',
                               iconColor: const Color(0xFFED8936),
                               backgroundColor: const Color(0xFFFFF5F0),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const MyRequestsScreen(),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -287,7 +307,15 @@ class HomeScreen extends StatelessWidget {
                               label: 'Timesheet',
                               iconColor: const Color(0xFF48BB78),
                               backgroundColor: const Color(0xFFF0FFF4),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const TimesheetScreen(),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ],
@@ -309,7 +337,14 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const TasksScreen(),
+                                ),
+                              );
+                            },
                             child: const Text('View All'),
                           ),
                         ],
@@ -330,7 +365,26 @@ class HomeScreen extends StatelessWidget {
                               title: 'Complete Onboarding Forms',
                               dueDate: 'Due Today',
                               isUrgent: true,
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const TaskDetailScreen(
+                                      taskTitle: 'Complete Onboarding Forms',
+                                      taskDescription:
+                                          'Review and complete all employee onboarding forms including personal information, tax forms, direct deposit, and benefits enrollment.',
+                                      assignedTo: 'Emily R.',
+                                      dueDate: 'Due Today',
+                                      priority: 'High',
+                                      status: 'Pending',
+                                      comments: [
+                                        'Jan 20, 2026 02:30 PM - Manager: Please prioritize this task',
+                                        'Jan 19, 2026 10:15 AM - HR: Forms are ready for completion',
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                             const Divider(height: 1),
                             _TaskItem(

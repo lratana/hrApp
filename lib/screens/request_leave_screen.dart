@@ -15,7 +15,7 @@ class _RequestLeaveScreenState extends State<RequestLeaveScreen> {
   final TextEditingController reasonController = TextEditingController(
     text: 'Family vacation trip to Florida',
   );
-  
+
   String selectedLeaveType = 'Vacation Leave';
   final List<Map<String, String>> leaveTypes = [
     {'name': 'Vacation Leave', 'emoji': '🏝️'},
@@ -75,7 +75,7 @@ class _RequestLeaveScreenState extends State<RequestLeaveScreen> {
       'Sep',
       'Oct',
       'Nov',
-      'Dec'
+      'Dec',
     ];
     return '${months[date.month - 1]} ${date.day}, ${date.year}';
   }
@@ -193,7 +193,7 @@ class _RequestLeaveScreenState extends State<RequestLeaveScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Jessica',
+                                'Ratana',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -317,8 +317,9 @@ class _RequestLeaveScreenState extends State<RequestLeaveScreen> {
                                         padding: const EdgeInsets.all(12),
                                         decoration: BoxDecoration(
                                           color: const Color(0xFFF7FAFC),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
                                         ),
                                         child: Row(
                                           children: [
@@ -363,8 +364,9 @@ class _RequestLeaveScreenState extends State<RequestLeaveScreen> {
                                         padding: const EdgeInsets.all(12),
                                         decoration: BoxDecoration(
                                           color: const Color(0xFFF7FAFC),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
                                         ),
                                         child: Row(
                                           children: [

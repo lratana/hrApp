@@ -224,7 +224,7 @@ class _ClockInOutScreenState extends State<ClockInOutScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Jessica',
+                              'Ratana',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,

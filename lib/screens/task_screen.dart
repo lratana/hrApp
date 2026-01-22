@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/appbar_decoration.dart';
 import 'package:flutter_application_1/screens/notification_screen.dart';
+import 'package:flutter_application_1/screens/task_detail_screen.dart';
 
 class TasksScreen extends StatefulWidget {
   const TasksScreen({super.key});
@@ -30,111 +31,116 @@ class _TasksScreenState extends State<TasksScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Header
-        Container(
-          decoration: decoration(),
-          child: SafeArea(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      const Expanded(
-                        child: Text(
-                          'Tasks',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+    return Scaffold(
+      backgroundColor: const Color(0xFFF7FAFC),
+      body: Column(
+        children: [
+          // Header
+          Container(
+            decoration: decoration(),
+            child: SafeArea(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          child: Text(
+                            'Tasks',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                      Stack(
-                        children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.notifications,
-                              color: Colors.white,
-                              size: 28,
+                        Stack(
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.notifications,
+                                color: Colors.white,
+                                size: 28,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const NotificationsScreen(),
+                                  ),
+                                );
+                              },
                             ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const NotificationsScreen(),
+                            Positioned(
+                              right: 8,
+                              top: 8,
+                              child: Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: const BoxDecoration(
+                                  color: Colors.red,
+                                  shape: BoxShape.circle,
                                 ),
-                              );
-                            },
-                          ),
-                          Positioned(
-                            right: 8,
-                            top: 8,
-                            child: Container(
-                              padding: const EdgeInsets.all(4),
-                              decoration: const BoxDecoration(
-                                color: Colors.red,
-                                shape: BoxShape.circle,
-                              ),
-                              constraints: const BoxConstraints(
-                                minWidth: 18,
-                                minHeight: 18,
-                              ),
-                              child: const Text(
-                                '2',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
+                                constraints: const BoxConstraints(
+                                  minWidth: 18,
+                                  minHeight: 18,
                                 ),
-                                textAlign: TextAlign.center,
+                                child: const Text(
+                                  '2',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                // Tabs
-                Container(
-                  color: Colors.white,
-                  child: TabBar(
-                    controller: _tabController,
-                    labelColor: const Color(0xFF2E7D95),
-                    unselectedLabelColor: Colors.grey,
-                    indicatorColor: const Color(0xFF2E7D95),
-                    indicatorWeight: 3,
-                    labelStyle: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                          ],
+                        ),
+                      ],
                     ),
-                    tabs: const [
-                      Tab(text: 'All'),
-                      Tab(text: 'Pending'),
-                      Tab(text: 'Completed'),
-                    ],
                   ),
-                ),
+
+                  // Tabs
+                  Container(
+                    color: Colors.white,
+                    child: TabBar(
+                      controller: _tabController,
+                      labelColor: const Color(0xFF2E7D95),
+                      unselectedLabelColor: Colors.grey,
+                      indicatorColor: const Color(0xFF2E7D95),
+                      indicatorWeight: 3,
+
+                      labelStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      tabs: const [
+                        Tab(text: 'All'),
+                        Tab(text: 'Pending'),
+                        Tab(text: 'Completed'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // Content
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                _buildTaskList(),
+                _buildTaskList(),
+                _buildCompletedList(),
               ],
             ),
           ),
-        ),
-        // Content
-        Expanded(
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-              _buildTaskList(),
-              _buildTaskList(),
-              _buildCompletedList(),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -145,7 +151,7 @@ class _TasksScreenState extends State<TasksScreen>
         children: [
           // Search Bar
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16.0),
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
@@ -176,7 +182,26 @@ class _TasksScreenState extends State<TasksScreen>
           const SizedBox(height: 12),
           // Task Items
           _TaskCard(
-            onTap: () => {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TaskDetailScreen(
+                    taskTitle: 'Complete Onboarding Forms',
+                    taskDescription:
+                        'Review and complete all employee onboarding forms including personal information, tax forms, direct deposit, and benefits enrollment. Ensure all required fields are filled accurately.',
+                    assignedTo: 'Emily R.',
+                    dueDate: 'Due Today',
+                    priority: 'High',
+                    status: 'Pending',
+                    comments: [
+                      'Jan 20, 2026 02:30 PM - Manager: Please prioritize this task',
+                      'Jan 19, 2026 10:15 AM - HR: Forms are ready for completion',
+                    ],
+                  ),
+                ),
+              );
+            },
             icon: Icons.description,
             iconColor: const Color(0xFF3182CE),
             iconBackground: const Color(0xFFBEE3F8),
@@ -188,7 +213,25 @@ class _TasksScreenState extends State<TasksScreen>
             priority: 'High',
           ),
           _TaskCard(
-            onTap: () => {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TaskDetailScreen(
+                    taskTitle: 'Schedule Training Session',
+                    taskDescription:
+                        'Coordinate and schedule a comprehensive training session for new software implementation. Include all team members and ensure meeting room availability.',
+                    assignedTo: 'Mike D.',
+                    dueDate: 'Due Apr 28',
+                    priority: 'Medium',
+                    status: 'Pending',
+                    comments: [
+                      'Jan 21, 2026 09:00 AM - Mike: Checking availability',
+                    ],
+                  ),
+                ),
+              );
+            },
             icon: Icons.play_circle_outline,
             iconColor: const Color(0xFF3182CE),
             iconBackground: const Color(0xFFBEE3F8),
@@ -200,7 +243,22 @@ class _TasksScreenState extends State<TasksScreen>
             priority: null,
           ),
           _TaskCard(
-            onTap: () => {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TaskDetailScreen(
+                    taskTitle: 'Review Weekly Timesheets',
+                    taskDescription:
+                        'Review and approve all weekly timesheets for the team. Verify hours worked, overtime, and project codes are accurate before final approval.',
+                    assignedTo: 'Sarah T.',
+                    dueDate: 'Due Apr 30',
+                    priority: 'Medium',
+                    status: 'Pending',
+                  ),
+                ),
+              );
+            },
             icon: Icons.check_circle_outline,
             iconColor: const Color(0xFF48BB78),
             iconBackground: const Color(0xFFC6F6D5),
@@ -212,7 +270,25 @@ class _TasksScreenState extends State<TasksScreen>
             priority: null,
           ),
           _TaskCard(
-            onTap: () => {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TaskDetailScreen(
+                    taskTitle: 'Approve Expense Reports',
+                    taskDescription:
+                        'Review and approve pending expense reports from team members. Verify receipts and ensure compliance with company expense policy.',
+                    assignedTo: 'Jessica',
+                    dueDate: 'Due Apr 27',
+                    priority: 'High',
+                    status: 'Pending',
+                    comments: [
+                      'Jan 21, 2026 11:30 AM - Jessica: 5 reports pending review',
+                    ],
+                  ),
+                ),
+              );
+            },
             icon: Icons.attach_money,
             iconColor: const Color(0xFFED8936),
             iconBackground: const Color(0xFFFFF5F0),
@@ -224,7 +300,26 @@ class _TasksScreenState extends State<TasksScreen>
             priority: null,
           ),
           _TaskCard(
-            onTap: () => {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TaskDetailScreen(
+                    taskTitle: 'Update Employee Handbook',
+                    taskDescription:
+                        'Update the employee handbook with new policies and procedures. Review legal compliance and get approval from management before distribution.',
+                    assignedTo: 'David W.',
+                    dueDate: 'Overdue',
+                    priority: 'High',
+                    status: 'Pending',
+                    comments: [
+                      'Jan 20, 2026 04:00 PM - Manager: This is now overdue, please prioritize',
+                      'Jan 18, 2026 01:30 PM - Legal: Policy changes sent for review',
+                    ],
+                  ),
+                ),
+              );
+            },
             icon: Icons.description,
             iconColor: const Color(0xFF3182CE),
             iconBackground: const Color(0xFFBEE3F8),

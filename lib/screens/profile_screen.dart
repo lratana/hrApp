@@ -132,7 +132,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                    'Jessica',
+                                    'Ratana',
                                     style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
@@ -223,7 +223,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                       decoration: const InputDecoration(
                                         border: InputBorder.none,
-                                        hintText: "Jane.doe@example.com",
+                                        hintText: "Ratana.long814@gmail.com",
                                         prefixIcon: Icon(
                                           Icons.email_outlined,
                                           color: Color(0xFF6B7280),
@@ -266,7 +266,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
-                                        hintText: "+1 234 567 8901",
+                                        hintText: "+855 96 72 75 814",
                                         prefixIcon: Icon(
                                           Icons.phone_outlined,
                                           color: Color(0xFF6B7280),
@@ -339,7 +339,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: "New York, USA",
+                                  hintText: "Phnom Penh, Cambodia",
                                 ),
                               ),
                             ),
